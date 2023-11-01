@@ -1,5 +1,7 @@
 @classDec
 class Demo{
+    @fieldDec
+    name: string ='Test';
     @Max(10)
     exec(a: number){
         console.log(a);
@@ -14,6 +16,15 @@ function methodDec<This, Args extends any[], Return>(
     return function(this: This, ...args: Args): Return{
         const res = target.call(this, ...args);
         return res;
+    }
+}
+
+function fieldDec<This>(
+    target: undefined,
+    context: ClassFieldDecoratorContext<This, string>
+){
+    return function(value: string){
+        return value;
     }
 }
 
