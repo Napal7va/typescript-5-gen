@@ -17,5 +17,5 @@ function methodDec<This, Args extends any[], Return>(
     }
 }
 
-const demo = new Demo()
+const demo = new Demo();
 demo.exec(1);
