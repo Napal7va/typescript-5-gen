@@ -3,7 +3,7 @@ class Demo{
     private _surname!: string;
     @fieldDec
     name: string ='Test';
-    @setDec
+    @IsString
     set surname(value: string){
         this._surname = value;
     }
@@ -13,12 +13,15 @@ class Demo{
     }
 }
 
-function setDec<This, Args extends any[], Return>(
+function IsString<This, Args extends any[], Return>(
     target: (this: This, ...args: Args) => Return,
     context: ClassSetterDecoratorContext<This, (this: This, ...args: Args) => Return>
 ){
-    console.log('Init method decorator');
+    console.log('Set method');
     return function(this: This, ...args: Args): Return{
+        if(typeof arg !== 'string'){
+            throw new Error ('Не строка');
+        }
         const res = target.call(this, ...args);
         return res;
     }
