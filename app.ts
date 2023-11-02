@@ -1,16 +1,21 @@
 @classDec
 class Demo{
+    private _surname!: string;
     @fieldDec
     name: string ='Test';
+    @setDec
+    set surname(value: string){
+        this._surname = value;
+    }
     @Max(10)
     exec(a: number){
         console.log(a);
     }
 }
 
-function methodDec<This, Args extends any[], Return>(
+function setDec<This, Args extends any[], Return>(
     target: (this: This, ...args: Args) => Return,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
+    context: ClassSetterDecoratorContext<This, (this: This, ...args: Args) => Return>
 ){
     console.log('Init method decorator');
     return function(this: This, ...args: Args): Return{
